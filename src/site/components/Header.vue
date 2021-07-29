@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-accent">
-      <div class="max-w-5xl text-right mx-auto p-2">
+      <div class="max-w-5xl text-right mx-auto p-2 px-3">
         <nuxt-link
           to="prayer-request"
           class="w-auto text-white hover:text-black hover:bg-white p-2 text-sm"
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="bg-primary flower-bg">
-      <div class="max-w-5xl mx-auto">
+      <div class="max-w-5xl mx-auto px-5">
         <nuxt-link to="/">
           <img
             class="py-5"
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="bg-accent">
-      <div class="max-w-5xl mx-auto py-3">
+      <div class="max-w-5xl mx-auto p-3">
         <nuxt-link
           v-for="link in navLinks"
           :key="link.text"
