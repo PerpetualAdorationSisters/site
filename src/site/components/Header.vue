@@ -29,14 +29,32 @@
     </div>
     <div class="bg-accent">
       <div class="max-w-5xl mx-auto p-3">
-        <nuxt-link
+        <span
           v-for="link in navLinks"
           :key="link.text"
-          :to="link.route"
-          class="w-auto text-white hover:text-black hover:bg-white py-3 px-3"
+          @mouseover="link.isHovered = true"
+          @mouseleave="link.isHovered = false"
         >
-          {{link.text}}
-        </nuxt-link>
+          <nuxt-link
+            :to="link.route"
+            class="w-auto text-white hover:text-black hover:bg-white py-3 px-3"
+          >
+            {{ link.text }}
+            <span v-if="link.subLinks" class="text-xs">▼</span>
+            <div v-if="link.isHovered" class="absolute z-10">
+              <div class="block mt-2">
+                <nuxt-link
+                  v-for="sublink in link.subLinks"
+                  :key="sublink.text"
+                  :to="sublink.route"
+                  class="block px-3 py-3 hover:underline bg-white dropdown-item"
+                >
+                  {{ sublink.text }}
+                </nuxt-link>
+              </div>
+            </div>
+          </nuxt-link>
+        </span>
       </div>
     </div>
   </div>
@@ -52,7 +70,18 @@ export default {
       },
       {
         text: 'About Us',
-        route: '#'
+        route: '#',
+        isHovered: false,
+        subLinks: [
+          {
+            text: 'Who We Are',
+            route: '/about-us'
+          },
+          {
+            text: 'Quarterly Newsletter',
+            route: '/quarterly-newsletter'
+          }
+        ]
       },
       {
         text: 'Formation',
@@ -77,7 +106,11 @@ export default {
 
 <style scoped>
 .flower-bg {
-  background-image: url("assets/floral-dark.png");
+  background-image: url('assets/floral-dark.png');
   background-repeat: repeat;
+}
+
+.dropdown-item {
+  margin-left: 72px;
 }
 </style>
