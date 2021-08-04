@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#c32d2d",
-        accent: "#cc9933"
-      },
+        primary: '#c32d2d',
+        accent: '#cc9933'
+      }
     },
     fontFamily: {
       'body': ['Palatino', 'Palatino Linotype', 'serif']
