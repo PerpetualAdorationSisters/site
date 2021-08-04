@@ -76,13 +76,17 @@
       </div>
     </nav>
     <nav v-if="mobileNavShown" class="absolute top-0 left-0 bottom-1 bg-gray-50 p-4 w-4/5">
-      <div class="mb-5 flex-row">
-        <button @click="mobileNavShown = false" class="inline">
-          <img src="~/assets/icons/x-square-gray.svg" width="30" alt="Close navigation"/>
-        </button>
-        <nuxt-link class="mb-5 inline" @click.native="mobileNavShown = false" to="/">
-          <img src="~/assets/icons/home-gray.svg" width="30" alt="Go home"/>
-        </nuxt-link>
+      <div class="mb-5 grid grid-rows-1 grid-flow-col justify-between">
+        <div class="row-span-1">
+          <button @click="mobileNavShown = false" class="inline">
+            <img src="~/assets/icons/x-square-gray.svg" width="30" alt="Close navigation"/>
+          </button>
+        </div>
+        <div class="row-span-1">
+          <nuxt-link class="mb-5 inline" @click.native="mobileNavShown = false" to="/">
+            <img src="~/assets/icons/home-gray.svg" width="30" alt="Go home"/>
+          </nuxt-link>
+        </div>
       </div>
       <p class="text-primary mb-1 font-semibold">
         Main Menu
