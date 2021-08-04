@@ -11,4 +11,4 @@ To build the website, you will need the following dependencies
 #### Building the site
 For local development, use the 'npm run serve' command to start a hot-reloading session locally
 
-For a production build, use 'npm run build' to create a distribution folder with the assembled files
+For a production build, use 'npm run generate' to create a distribution folder with the assembled files
