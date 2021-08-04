@@ -27,13 +27,15 @@
         </nuxt-link>
       </div>
     </div>
-    <div class="bg-accent">
+    <nav class="bg-accent">
       <div class="max-w-5xl mx-auto p-3">
         <span
           v-for="link in navLinks"
           :key="link.text"
           @mouseover="link.isHovered = true"
           @mouseleave="link.isHovered = false"
+          @focus="link.isHovered = true"
+          @blur="link.isHovered = false"
         >
           <nuxt-link
             :to="link.route"
@@ -55,8 +57,15 @@
             </div>
           </nuxt-link>
         </span>
+        <div class="inline">
+          <a
+            href="mailto:adortrices@sfcatholic.org"
+          >
+            <img src="~/assets/icons/mail.svg" class="inline" width="20" />
+          </a>
+        </div>
       </div>
-    </div>
+    </nav>
   </div>
 </template>
 

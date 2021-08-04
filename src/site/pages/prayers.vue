@@ -58,3 +58,11 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    title: 'Prayers - Perpetual Adoration Sisters of the Blessed Sacrament'
+  }
+}
+</script>
