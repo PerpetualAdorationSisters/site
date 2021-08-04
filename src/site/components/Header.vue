@@ -48,7 +48,12 @@
         >
           <nuxt-link
             :to="link.route"
-            class="w-auto text-white hover:text-black hover:bg-white py-3 px-3"
+            class="w-auto hover:text-black hover:bg-white py-3 px-3"
+            :class="{
+              'text-white': !routeMatchesLink(link.route),
+              'text-black': routeMatchesLink(link.route),
+              'bg-white': routeMatchesLink(link.route)
+            }"
           >
             {{ link.text }}
             <span v-if="link.subLinks" class="text-xs">▼</span>
@@ -75,8 +80,8 @@
         </div>
       </div>
     </nav>
-    <nav v-if="mobileNavShown" class="absolute top-0 left-0 bottom-1 bg-gray-50 p-4 w-4/5">
-      <div class="mb-5 grid grid-rows-1 grid-flow-col justify-between">
+    <nav v-if="mobileNavShown" class="absolute top-0 left-0 bottom-1 bg-gray-50 w-4/5">
+      <div class="mb-5 grid grid-rows-1 grid-flow-col justify-between p-4">
         <div class="row-span-1">
           <button @click="mobileNavShown = false" class="inline">
             <img src="~/assets/icons/x-square-gray.svg" width="30" alt="Close navigation"/>
@@ -88,13 +93,16 @@
           </nuxt-link>
         </div>
       </div>
-      <p class="text-primary mb-1 font-semibold">
+      <p class="text-primary mb-1 font-semibold px-4">
         Main Menu
       </p>
       <div
         v-for="link in navLinks"
         :key="link.text"
-        class="py-2"
+        class="py-2 px-4"
+        :class="{
+          'bg-gray-200': routeMatchesLink(link.route)
+        }"
       >
         <nuxt-link
           :to="link.route"
@@ -119,19 +127,19 @@
           </div>
         </div>
       </div>
-      <p class="text-primary mb-1 mt-4 font-semibold">
+      <p class="text-primary mb-1 mt-4 font-semibold px-4">
         Prayers
       </p>
       <nuxt-link
         to="prayer-request"
-        class="hover:underline block my-3"
+        class="hover:underline block my-3 px-4"
         @click.native="mobileNavShown = false"
       >
         SEND US YOUR PRAYER REQUEST
       </nuxt-link>
       <nuxt-link
         to="mass-cards"
-        class="hover:underline block"
+        class="hover:underline block px-4"
         @click.native="mobileNavShown = false"
       >
         REQUEST A MASS CARD
@@ -181,7 +189,13 @@ export default {
         route: '#'
       }
     ]
-  })
+  }),
+  methods: {
+    routeMatchesLink (link) {
+      console.log(this.$route)
+      return this.$route.path === link
+    }
+  }
 }
 </script>
 
