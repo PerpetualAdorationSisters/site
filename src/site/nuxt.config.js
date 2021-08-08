@@ -15,8 +15,12 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/site/favicon.ico' } // TODO: Remove this once custom domain is set up
     ]
+  },
+
+  router: {
+    base: '/site/' // TODO: Remove this once custom domain is set up
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -44,5 +48,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  generate: {
+    dir: '../../docs'
   }
 }
