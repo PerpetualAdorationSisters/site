@@ -32,7 +32,7 @@
 
     <div class="my-5 grid grid-cols-2 gap-10">
       <div
-        v-for="video in videoList"
+        v-for="video in videos"
         :key="video.url"
         class="mt-10 full-height-video col-span-2 md:col-span-1"
       >
@@ -52,6 +52,36 @@
         src="https://youtube.com/embed/s1Z2hgzY7xM"
         frameborder="0"
       ></iframe>
+    </div>
+
+    <hr class="bg-gray-50 mt-20"/>
+    <h2 class="my-7 text-primary text-xl font-semibold">Monastery Construction Photos</h2>
+    <div class="mt-5 mb-7 grid grid-cols-3 gap-5 md:gap-20 mx-0 md:mx-20">
+      <div
+        v-for="monasteryImage in monasteryGallery"
+        :key="monasteryImage.imageUrl"
+        class="col-span-1"
+      >
+        <img
+          :src="monasteryImage.imageUrl"
+          :alt="monasteryImage.imageAlt"
+          class="full-width-image pa-2"
+        />
+      </div>
+    </div>
+
+    <hr class="bg-gray-50 mt-20"/>
+    <h2 class="my-7 text-primary text-xl font-semibold">Testimonials</h2>
+    <div class="mt-5 mb-7 grid grid-cols-3 gap-5 md:gap-20 mx-0 md:mx-20">
+      <div
+        v-for="testimonial in testimonials"
+        :key="testimonial.person"
+        class="col-span-3 md:col-span-1 gap-5 mb-10 md:mb-0"
+      >
+        <img src="~/assets/icons/quote-left-secondary.svg" width="30" class="mb-2" />
+        <p class="text-primary italic">{{ testimonial.text }}</p>
+        <p class="text-primary italic mt-5">~ {{ testimonial.person }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -82,7 +112,7 @@ export default {
         imageAlt: 'Heart icon'
       }
     ],
-    videoList: [
+    videos: [
       {
         title: 'Power of Prayer: One year later…Sew for the Soul',
         url: 'https://youtube.com/embed/UEq_Q-2ejrw'
@@ -107,6 +137,50 @@ export default {
         title: 'The Power of Prayer – A Leap of Faith',
         url: 'https://youtube.com/embed/rnk5TNHg3K4'
       }
+    ],
+    monasteryGallery: [
+      {
+        imageUrl: require('~/assets/home/Monastery_Gallery_01.jpg'),
+        imageAlt: 'Bishop blessing the monastery'
+      },
+      {
+        imageUrl: require('~/assets/home/Monastery_Gallery_02.jpg'),
+        imageAlt: 'Sisters walking near the monastery'
+      },
+      {
+        imageUrl: require('~/assets/home/Monastery_Gallery_03.jpg'),
+        imageAlt: 'Sisters and the bishop at the opening of the monastery'
+      },
+      {
+        imageUrl: require('~/assets/home/Monastery_Gallery_04.jpg'),
+        imageAlt: 'Construction of the monastery\'s basement'
+      },
+      {
+        imageUrl: require('~/assets/home/Monastery_Gallery_05.jpg'),
+        imageAlt: 'Foundation of the monastery is being poured'
+      },
+      {
+        imageUrl: require('~/assets/home/Monastery_Gallery_06.jpg'),
+        imageAlt: 'Construction worker reviews the site plans'
+      },
+      {
+        imageUrl: require('~/assets/home/Monastery_Gallery_07.jpg'),
+        imageAlt: 'Walls are being framed for the monastery'
+      }
+    ],
+    testimonials: [
+      {
+        text: 'We always call the Perpetual Adoration Sisters of the Blessed Sacrament and have them pray when our family needs it. Their prayer brings our family peace when we need it most. They are a great gift to our diocese!',
+        person: 'Barb Swift'
+      },
+      {
+        text: 'We always call the Perpetual Adoration Sisters of the Blessed Sacrament and have them pray when our family needs it. Their prayer brings our family peace when we need it most. They are a great gift to our diocese!',
+        person: 'Dave Fleck'
+      },
+      {
+        text: 'The meditation aspect of adoration with the Eucharist is impossible to describe. Having the Adoration Sisters available 24 hours a day to pray for us, is perhaps the greatest unadvertised benefit available to us in our diocese. They are a blessing.',
+        person: 'Steve Lynch'
+      }
     ]
   })
 }
@@ -125,5 +199,11 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.full-width-image {
+  max-width: 100%;
+  width:100%;
+  height:100%;
 }
 </style>
