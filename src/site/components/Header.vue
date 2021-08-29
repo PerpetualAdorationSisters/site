@@ -174,7 +174,7 @@ export default {
       },
       {
         text: 'Formation',
-        route: '#'
+        route: '/formation'
       },
       {
         text: 'Prayers',
