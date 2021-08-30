@@ -182,7 +182,7 @@ export default {
       },
       {
         text: 'Donate',
-        route: '#'
+        route: '/donate'
       },
       {
         text: 'Contact',
