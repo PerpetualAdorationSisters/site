@@ -72,15 +72,17 @@
         v-model="prayerRequest.recipientAddress"
       ></textarea>
     </div>
-    <p v-if="errMsg" class="mt-2 text-primary">
-      {{ errMsg }}
-    </p>
-    <button type="button" class="px-5 py-2 my-4 bg-blue-700 text-white rounded" @click="submit">SEND</button>
+    <p v-if="errMsg" class="mt-2 text-primary">{{ errMsg }}</p>
+    <p v-if="isSubmitting" class="mt-2">Submitting...</p>
+    <p v-if="submitSucceeded" class="mt-2">Prayer request submitted. Thank you!</p>
+    <button v-if="!isSubmitting && !submitSucceeded" type="button" class="px-5 py-2 my-4 bg-blue-700 text-white rounded" @click="submit">SEND</button>
   </form>
 </template>
 
 <script>
 /* eslint no-useless-escape: "off" */
+
+import axios from 'axios'
 
 export default {
   data: () => ({
@@ -92,17 +94,28 @@ export default {
       recipientName: '',
       recipientAddress: ''
     },
-    errMsg: ''
+    errMsg: '',
+    submitSucceeded: false,
+    isSubmitting: false
   }),
   methods: {
-    submit () {
-      this.errMsg = ''
-      const validationErrors = this.getValidationErrors()
-      if (validationErrors && validationErrors.length > 0) {
-        this.errMsg = validationErrors.join(', ')
-      }
+    async submit () {
+      try {
+        this.errMsg = ''
+        const validationErrors = this.getValidationErrors()
+        if (validationErrors && validationErrors.length > 0) {
+          this.errMsg = validationErrors.join(', ')
+          return
+        }
+        this.isSubmitting = true
 
-      // TODO: Implement email api call
+        await axios.post('http://localhost:7071/api/PrayerRequest', this.prayerRequest)
+        this.submitSucceeded = true
+        this.isSubmitting = false
+      } catch (err) {
+        this.isSubmitting = false
+        this.errMsg = 'Error: ' + err.response?.data
+      }
     },
     getValidationErrors () {
       const result = []
