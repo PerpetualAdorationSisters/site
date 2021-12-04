@@ -86,7 +86,7 @@ namespace EmailApi
 
                 await _emailer.SendEmail(
                     Environment.GetEnvironmentVariable("PrayerRequests:EmailTo"),
-                    Environment.GetEnvironmentVariable("PrayerRequests:EmailTo"),
+                    Environment.GetEnvironmentVariable("PrayerRequests:EmailFrom"),
                     $"New Prayer Request Received From {requestModel.Name}",
                     emailBody);
 
