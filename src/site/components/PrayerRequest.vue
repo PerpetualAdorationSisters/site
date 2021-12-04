@@ -74,7 +74,7 @@
     </div>
     <p v-if="errMsg" class="mt-2 text-primary">{{ errMsg }}</p>
     <p v-if="isSubmitting" class="mt-2">Submitting...</p>
-    <p v-if="submitSucceeded" class="mt-2">Prayer request submitted. Thank you!</p>
+    <p v-if="submitSucceeded" class="mt-2 text-green-700">Prayer request submitted. Thank you!</p>
     <button v-if="!isSubmitting && !submitSucceeded" type="button" class="px-5 py-2 my-4 bg-blue-700 text-white rounded" @click="submit">SEND</button>
   </form>
 </template>
@@ -109,7 +109,7 @@ export default {
         }
         this.isSubmitting = true
 
-        await axios.post('http://localhost:7071/api/PrayerRequest', this.prayerRequest)
+        await axios.post('https://perpetualadorationsisters.azurewebsites.net/api/prayerrequest', this.prayerRequest)
         this.submitSucceeded = true
         this.isSubmitting = false
       } catch (err) {
