@@ -159,16 +159,12 @@ export default {
       },
       {
         text: 'About Us',
-        route: '#',
+        route: '/about-us',
         isHovered: false,
         subLinks: [
           {
             text: 'Who We Are',
             route: '/about-us'
-          },
-          {
-            text: 'Quarterly Newsletter',
-            route: '/quarterly-newsletter'
           }
         ]
       },
@@ -186,7 +182,7 @@ export default {
       },
       {
         text: 'Contact',
-        route: '/contact'
+        route: '/prayer-request'
       }
     ]
   }),
