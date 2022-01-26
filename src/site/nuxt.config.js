@@ -19,10 +19,6 @@ export default {
     ]
   },
 
-  router: {
-    base: '/site/' // TODO: Remove this once custom domain is set up
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
