@@ -11,12 +11,15 @@ git checkout release
 git pull
 git merge master
 
+cd ./src/site/
 npm run generate
 
-git add *
+git add .
 releaseName="Release ${1}"
-git commit -m 
+git commit -m %releaseName%
 git push
+
+git checkout master
 
 echo ---------------------------------------
 echo Finished release named "%releaseName%"
