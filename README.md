@@ -31,5 +31,5 @@ For local development
 ## Releasing updates to the website
 For a production release
 - In a terminal, navigate to the root of the repository
-- Run `./release.bat YYYYMMDDNN` and replace the release date with the current date (this is just a convention, not exactly necesary)
+- Run `./release.ps1 YYYYMMDDNN` and replace the release date with the current date (this is just a convention, not exactly necesary)
 - Check the live website in a few minutes to see changes show up
