@@ -60,6 +60,11 @@
         <div class="p-2 bg-primary text-white my-7 text-lg rounded donate-button text-center">Make A Donation</div>
       </a>
     </div>
+    <div class="">
+      <a href="https://www.signupgenius.com/go/10c0e4ca4ab2fa7f8c52-adoration" target="_blank" rel="nofollow noreferrer">
+        <div class="p-2 bg-primary text-white my-7 text-lg rounded donate-button text-center">Other Donations</div>
+      </a>
+    </div>
   </div>
 </template>
 
