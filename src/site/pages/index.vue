@@ -122,14 +122,6 @@ export default {
         url: 'https://player.vimeo.com/video/362171995'
       },
       {
-        title: 'What is Intercessory Prayer?',
-        url: 'https://youtube.com/embed/SuVym5HksPk'
-      },
-      {
-        title: 'About the Sisters',
-        url: 'https://youtube.com/embed/6HUi0qg_yoA'
-      },
-      {
         title: 'The Power of Prayer – A Survivor’s Story',
         url: 'https://youtube.com/embed/mpf_6fOSyAk'
       },
@@ -174,7 +166,7 @@ export default {
         person: 'Barb Swift'
       },
       {
-        text: 'We always call the Perpetual Adoration Sisters of the Blessed Sacrament and have them pray when our family needs it. Their prayer brings our family peace when we need it most. They are a great gift to our diocese!',
+        text: 'Praying with the Perpetual Adoration Sisters of the Blessed Sacrament has had a profound effect on my life and my family\'s. When I pray with the Sisters I truly feel the presence of the Lord.',
         person: 'Dave Fleck'
       },
       {
