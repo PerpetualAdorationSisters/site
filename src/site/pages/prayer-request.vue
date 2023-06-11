@@ -17,7 +17,7 @@
         <p class="mt-5 font-semibold">Gift Shop Hours:</p>
         <p class="font-semibold">Monday-Saturday 9:30am-5:30pm</p>
         <p class="mt-5 font-semibold">Holy Mass:</p>
-        <p class="font-semibold">Monday through Saturday at 7:30am</p>
+        <p class="font-semibold">Monday through Saturday at 7:00am</p>
         <p class="italic">
           Please note that as a full-time priest chaplain is not available to
           serve the community, other parish responsibilities of the priests who
@@ -25,7 +25,7 @@
         </p>
         <p class="mt-5 font-semibold">Adoration Chapel Hours:</p>
         <p class="font-semibold">Open to the public daily</p>
-        <p class="font-semibold">7:00am-6:00pm</p>
+        <p class="font-semibold">6:00am-6:00pm</p>
         <p
           class="italic"
         >The Blessed Sacrament will be exposed in the monstrance each day as duties within the monastery allow.</p>
