@@ -2,7 +2,9 @@
   <div>
     <div class="mb-5 grid grid-flow-col px-2">
       <div class="col-span-full md:col-span-6 mr-0 md:mr-4">
-        <PrayerRequest></PrayerRequest>
+        <!-- <PrayerRequest></PrayerRequest> -->
+        <p class="text-2xl font-semibold">We're doing some construction!</p>
+        <p class="text-m">The prayer request form will be available again soon.</p>
       </div>
       <div class="col-span-full md:col-span-6 ml-0 md:ml-4 mt-5 md:mt-0">
         <h2 class="text-primary text-xl font-semibold mb-4">Mater Ecclesiae Monastery</h2>
@@ -48,12 +50,12 @@
 </template>
 
 <script>
-import PrayerRequest from '@/components/PrayerRequest'
+// import PrayerRequest from '@/components/PrayerRequest'
 
-export default {
-  components: {
-    PrayerRequest
-  }
-}
+// export default {
+//   components: {
+//     PrayerRequest
+//   }
+// }
 
 </script>
