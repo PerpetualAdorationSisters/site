@@ -123,11 +123,14 @@ public class PrayerRequestFunc
         }
     }
 
-    [Function("GetCurrentPrayerRequests")]
-    public async Task<HttpResponseData> GetCurrentPrayerRequests([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
-    {
-        return null;
-    }
+
+    // TODO - add backend to retrieve prayer requests
+
+    // [Function("GetCurrentPrayerRequests")]
+    // public async Task<HttpResponseData> GetCurrentPrayerRequests([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
+    // {
+    //     return null;
+    // }
 
 
     // Validate that they are not spamming us with requests. Default limit is 5 requests per 5 minutes
