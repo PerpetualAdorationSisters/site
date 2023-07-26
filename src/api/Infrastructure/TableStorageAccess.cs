@@ -16,7 +16,7 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
         _tableClient = new TableClient(
             new Uri("https://adorationsisters.table.core.windows.net/prayerrequests"),
             "prayerrequests",
-            new TableSharedKeyCredential("adorationsisters", "TODO"));
+            new TableSharedKeyCredential("adorationsisters", "REDACTED"));
     }
 
     public List<PrayerRequestModel> GetPrayerRequests(int year, int month)
@@ -60,5 +60,5 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
         };
     }
 
-    private string CreatePartitionKey(int year, int month) => $"{year.ToString("####")}-{month.ToString("##")}";
+    private string CreatePartitionKey(int year, int month) => $"{year.ToString("0000")}-{month.ToString("00")}";
 }
