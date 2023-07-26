@@ -109,7 +109,7 @@ export default {
         }
         this.isSubmitting = true
 
-        await axios.post('https://perpetualadorationsisters.azurewebsites.net/api/prayerrequest', this.prayerRequest)
+        await axios.post('https://perpetualadorationsisters.azurewebsites.net/api/createprayerrequest', this.prayerRequest)
         this.submitSucceeded = true
         this.isSubmitting = false
       } catch (err) {
