@@ -10,6 +10,10 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker;
 using System.Net;
 using Microsoft.Extensions.Caching.Memory;
+using System.Web;
+using Microsoft.Extensions.Configuration;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace API.PrayerRequest;
 
@@ -22,18 +26,23 @@ public class PrayerRequestFunc
     private readonly IPrayerRequestWriter _prayerRequestWriter;
     private readonly IPrayerRequestReader _prayerRequestReader;
     private readonly IMemoryCache _memoryCache;
+    private readonly IConfiguration _config;
     private readonly ILogger _logger;
+
+    private const string PASSWORD_SALT = "575045e684bf09dc4bb63a8d6552998f5c43556bec7ed9ec0950ee0d90c2ab5e";
 
     public PrayerRequestFunc(
         IPrayerRequestWriter prayerRequestWriter,
         IPrayerRequestReader prayerRequestReader,
-        IMemoryCache memCache, 
+        IMemoryCache memCache,
+        IConfiguration config,
         ILoggerFactory loggerFac)
     {
         _prayerRequestWriter = prayerRequestWriter;
         _prayerRequestReader = prayerRequestReader;
 
         _memoryCache = memCache;
+        _config = config;
         _logger = loggerFac.CreateLogger<PrayerRequestFunc>();
     }
 
@@ -109,7 +118,8 @@ public class PrayerRequestFunc
 
             var emailBody = _prayerRequestWriter.SavePrayerRequest(requestModel);
 
-            await response.WriteAsJsonAsync(new {
+            await response.WriteAsJsonAsync(new
+            {
                 success = true
             });
             return response;
@@ -123,14 +133,39 @@ public class PrayerRequestFunc
         }
     }
 
+    [Function("GetPrayerRequests")]
+    public async Task<HttpResponseData> GetPrayerRequests([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
+    {
+        var response = req.CreateResponse();
 
-    // TODO - add backend to retrieve prayer requests
+        const string PASSWORD_HEADER_NAME = "PASSWORD";
+        if (!req.Headers.Any(e => e.Key.Equals(PASSWORD_HEADER_NAME, StringComparison.InvariantCultureIgnoreCase)))
+        {
+            await Task.Delay(2000);
+            response.StatusCode = HttpStatusCode.Unauthorized;
+            return response;
+        }
 
-    // [Function("GetCurrentPrayerRequests")]
-    // public async Task<HttpResponseData> GetCurrentPrayerRequests([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
-    // {
-    //     return null;
-    // }
+        var providedPassword = req.Headers.FirstOrDefault(
+            e => e.Key.Equals(PASSWORD_HEADER_NAME, StringComparison.InvariantCultureIgnoreCase)).Value.FirstOrDefault();
+        var passwordHash = ComputePasswordHash(providedPassword);
+        if (passwordHash != _config["PasswordHash"])
+        {
+            await Task.Delay(2000);
+            response.StatusCode = HttpStatusCode.Unauthorized;
+            return response;
+        }
+
+        var query = HttpUtility.ParseQueryString(req.Url.Query);
+        var year = int.Parse(query["year"]);
+        var month = int.Parse(query["month"]);
+
+        var requestsForYearMonth = _prayerRequestReader.GetPrayerRequests(year, month).OrderByDescending(e => e.CreatedDate);
+
+        await response.WriteAsJsonAsync(requestsForYearMonth);
+
+        return response;
+    }
 
 
     // Validate that they are not spamming us with requests. Default limit is 5 requests per 5 minutes
@@ -155,5 +190,13 @@ public class PrayerRequestFunc
             return true;
         }
         return false;
+    }
+
+    private string ComputePasswordHash(string password)
+    {
+        var inputBytes = Encoding.UTF8.GetBytes(password + PASSWORD_SALT);
+        var inputHash = SHA256.HashData(inputBytes);
+
+        return Convert.ToHexString(inputHash);
     }
 }

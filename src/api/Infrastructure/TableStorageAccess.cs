@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.PrayerRequest;
 using Azure.Data.Tables;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Infrastructure;
 
@@ -11,12 +12,12 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
 {
     private readonly TableClient _tableClient;
 
-    public TableStorageAccess()
+    public TableStorageAccess(IConfiguration config)
     {
         _tableClient = new TableClient(
             new Uri("https://adorationsisters.table.core.windows.net/prayerrequests"),
             "prayerrequests",
-            new TableSharedKeyCredential("adorationsisters", "REDACTED"));
+            new TableSharedKeyCredential("adorationsisters", config["StorageKey"]));
     }
 
     public List<PrayerRequestModel> GetPrayerRequests(int year, int month)
@@ -30,7 +31,7 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
     {
         await _tableClient.AddEntityAsync(MapToTableEntity(prayerRequest));
     }
-
+ 
     private PrayerRequestTableEntity MapToTableEntity(PrayerRequestModel apiModel)
     {
         return new PrayerRequestTableEntity
@@ -57,6 +58,7 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
             Request = tableModel.Request,
             RecipientName = tableModel.RecipientName,
             RecipientAddress = tableModel.RecipientAddress,
+            CreatedDate = tableModel.Timestamp?.DateTime ?? DateTime.MinValue
         };
     }
 

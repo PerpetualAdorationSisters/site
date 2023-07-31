@@ -23,4 +23,6 @@ public class PrayerRequestModel
     public string RecipientName { get; set; }
     [StringLength(512)]
     public string RecipientAddress { get; set; }
+
+    public DateTime? CreatedDate { get; set; }
 }
