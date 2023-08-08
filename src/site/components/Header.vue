@@ -73,7 +73,7 @@
         </span>
         <div class="inline ml-1">
           <a
-            href="mailto:adortrices@sfcatholic.org"
+            href="mailto:adoratrices@sfcatholic.org"
           >
             <img src="~/assets/icons/mail.svg" class="inline" width="20" alt="Contact us through email" />
           </a>
