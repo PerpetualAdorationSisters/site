@@ -36,6 +36,7 @@
 /* eslint object-shorthand: "off" */
 
 import axios from 'axios'
+import apiConsts from '@/apiConsts'
 
 export default {
   data: () => ({
@@ -43,7 +44,6 @@ export default {
     password: undefined,
     passwordInput: undefined,
     isLoading: true,
-    requestsUrl: 'https://perpetualadorationsisters.azurewebsites.net/api/getprayerrequests',
     errorMessage: '',
     passwordStorageKey: 'password',
     isAuthenticated: undefined
@@ -64,8 +64,7 @@ export default {
         this.isLoading = true
         this.errorMessage = ''
 
-        const now = new Date()
-        await axios.get(`${this.requestsUrl}?year=${now.getFullYear()}&month=${now.getMonth()}`, {
+        await axios.get(`${apiConsts.baseUrl}/checkauth`, {
           headers: { PASSWORD: this.passwordInput }
         })
 
@@ -80,7 +79,7 @@ export default {
         if (ex.response.status === 401) {
           this.errorMessage = 'Incorrect password, please try again.'
           this.isAuthenticated = false
-        } else if (ex.response.status >= 500) {
+        } else {
           this.errorMessage = 'Something went wrong, please try again shortly.'
         }
         this.isLoading = false
@@ -89,11 +88,11 @@ export default {
     async loadRequests () {
       try {
         const now = new Date()
-        const request1 = axios.get(`${this.requestsUrl}?year=${now.getFullYear()}&month=${now.getMonth() + 1}`, {
+        const request1 = axios.get(`${apiConsts.baseUrl}/getprayerrequests?year=${now.getFullYear()}&month=${now.getMonth() + 1}`, {
           headers: { PASSWORD: this.password }
         })
 
-        const request2 = axios.get(`${this.requestsUrl}?year=${now.getFullYear()}&month=${now.getMonth()}`, {
+        const request2 = axios.get(`${apiConsts.baseUrl}/getprayerrequests?year=${now.getFullYear()}&month=${now.getMonth()}`, {
           headers: { PASSWORD: this.password }
         })
 

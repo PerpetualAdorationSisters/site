@@ -83,6 +83,7 @@
 /* eslint no-useless-escape: "off" */
 
 import axios from 'axios'
+import apiConsts from '@/apiConsts'
 
 export default {
   data: () => ({
@@ -109,7 +110,7 @@ export default {
         }
         this.isSubmitting = true
 
-        await axios.post('https://perpetualadorationsisters.azurewebsites.net/api/createprayerrequest', this.prayerRequest)
+        await axios.post(`${apiConsts.baseUrl}/createprayerrequest`, this.prayerRequest)
         this.submitSucceeded = true
         this.isSubmitting = false
       } catch (err) {

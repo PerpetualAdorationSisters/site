@@ -138,20 +138,8 @@ public class PrayerRequestFunc
     {
         var response = req.CreateResponse();
 
-        const string PASSWORD_HEADER_NAME = "PASSWORD";
-        if (!req.Headers.Any(e => e.Key.Equals(PASSWORD_HEADER_NAME, StringComparison.InvariantCultureIgnoreCase)))
+        if (!await VerifyPassword(req)) 
         {
-            await Task.Delay(2000);
-            response.StatusCode = HttpStatusCode.Unauthorized;
-            return response;
-        }
-
-        var providedPassword = req.Headers.FirstOrDefault(
-            e => e.Key.Equals(PASSWORD_HEADER_NAME, StringComparison.InvariantCultureIgnoreCase)).Value.FirstOrDefault();
-        var passwordHash = ComputePasswordHash(providedPassword);
-        if (passwordHash != _config["PasswordHash"])
-        {
-            await Task.Delay(2000);
             response.StatusCode = HttpStatusCode.Unauthorized;
             return response;
         }
@@ -167,6 +155,39 @@ public class PrayerRequestFunc
         return response;
     }
 
+    [Function("CheckAuth")]
+    public async Task<HttpResponseData> CheckAuth([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
+    {
+        var response = req.CreateResponse();
+
+        if (!await VerifyPassword(req)) 
+        {
+            response.StatusCode = HttpStatusCode.Unauthorized;
+        }
+
+        return response;
+    }
+
+    private async Task<bool> VerifyPassword(HttpRequestData req) 
+    {
+        const string PASSWORD_HEADER_NAME = "PASSWORD";
+        if (!req.Headers.Any(e => e.Key.Equals(PASSWORD_HEADER_NAME, StringComparison.InvariantCultureIgnoreCase)))
+        {
+            await Task.Delay(2000);
+            return false;
+        }
+
+        var providedPassword = req.Headers.FirstOrDefault(
+            e => e.Key.Equals(PASSWORD_HEADER_NAME, StringComparison.InvariantCultureIgnoreCase)).Value.FirstOrDefault();
+        var passwordHash = ComputePasswordHash(providedPassword);
+        if (passwordHash != _config["PasswordHash"])
+        {
+            await Task.Delay(2000);
+            return false;
+        }
+
+        return true;
+    }
 
     // Validate that they are not spamming us with requests. Default limit is 5 requests per 5 minutes
     private bool ValidateAndCacheIPThrottling(string reqIP)
