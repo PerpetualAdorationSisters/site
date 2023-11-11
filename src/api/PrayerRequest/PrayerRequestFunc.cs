@@ -138,7 +138,7 @@ public class PrayerRequestFunc
     {
         var response = req.CreateResponse();
 
-        if (!await VerifyPassword(req)) 
+        if (!await VerifyPassword(req))
         {
             response.StatusCode = HttpStatusCode.Unauthorized;
             return response;
@@ -155,12 +155,45 @@ public class PrayerRequestFunc
         return response;
     }
 
+    [Function("CompletePrayerRequest")]
+    public async Task<HttpResponseData> CompletePrayerRequest([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "prayer-request/{reqId}/complete")] HttpRequestData req, string reqId)
+    {
+        var response = req.CreateResponse(HttpStatusCode.OK);
+
+        if (req.Method.ToLower() == "options") return response;
+
+        try
+        {
+            if (!await VerifyPassword(req))
+            {
+                response.StatusCode = HttpStatusCode.Unauthorized;
+                return response;
+            }
+
+            await _prayerRequestWriter.CompletePrayerRequest(reqId);
+
+            await response.WriteAsJsonAsync(new
+            {
+                success = true
+            });
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Uncaught error processing prayer request complete.");
+            await response.WriteStringAsync("An unknown error occurred.");
+            response.StatusCode = HttpStatusCode.InternalServerError;
+            return response;
+        }
+    }
+
+
     [Function("CheckAuth")]
     public async Task<HttpResponseData> CheckAuth([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
     {
         var response = req.CreateResponse();
 
-        if (!await VerifyPassword(req)) 
+        if (!await VerifyPassword(req))
         {
             response.StatusCode = HttpStatusCode.Unauthorized;
         }
@@ -168,7 +201,7 @@ public class PrayerRequestFunc
         return response;
     }
 
-    private async Task<bool> VerifyPassword(HttpRequestData req) 
+    private async Task<bool> VerifyPassword(HttpRequestData req)
     {
         const string PASSWORD_HEADER_NAME = "PASSWORD";
         if (!req.Headers.Any(e => e.Key.Equals(PASSWORD_HEADER_NAME, StringComparison.InvariantCultureIgnoreCase)))

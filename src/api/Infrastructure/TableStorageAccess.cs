@@ -31,7 +31,15 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
     {
         await _tableClient.AddEntityAsync(MapToTableEntity(prayerRequest));
     }
- 
+
+    public async Task CompletePrayerRequest(string prayerRequestId)
+    {
+        var prayerRequest = _tableClient.Query<PrayerRequestTableEntity>(e => e.RowKey == prayerRequestId, 1).Single();
+        prayerRequest.IsCompleted = true;
+
+        await _tableClient.UpdateEntityAsync(prayerRequest, prayerRequest.ETag);
+    }
+
     private PrayerRequestTableEntity MapToTableEntity(PrayerRequestModel apiModel)
     {
         return new PrayerRequestTableEntity
@@ -42,6 +50,8 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
             Request = apiModel.Request,
             RecipientName = apiModel.RecipientName,
             RecipientAddress = apiModel.RecipientAddress,
+            
+            IsCompleted = apiModel.IsCompleted,
 
             RowKey = Guid.NewGuid().ToString(),
             PartitionKey = CreatePartitionKey(DateTime.Now.Year, DateTime.Now.Month)
@@ -52,12 +62,15 @@ public class TableStorageAccess : IPrayerRequestWriter, IPrayerRequestReader
     {
         return new PrayerRequestModel
         {
+            Id = tableModel.RowKey,
             Name = tableModel.Name,
             Email = tableModel.Email,
             Subject = tableModel.Subject,
             Request = tableModel.Request,
             RecipientName = tableModel.RecipientName,
             RecipientAddress = tableModel.RecipientAddress,
+            IsCompleted = tableModel.IsCompleted,
+
             CreatedDate = tableModel.Timestamp?.DateTime ?? DateTime.MinValue
         };
     }
