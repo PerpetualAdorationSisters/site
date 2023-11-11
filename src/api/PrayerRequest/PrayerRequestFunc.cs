@@ -148,7 +148,7 @@ public class PrayerRequestFunc
         var year = int.Parse(query["year"]);
         var month = int.Parse(query["month"]);
 
-        var requestsForYearMonth = _prayerRequestReader.GetPrayerRequests(year, month).OrderByDescending(e => e.CreatedDate);
+        var requestsForYearMonth = _prayerRequestReader.GetPrayerRequests(year, month).OrderBy(e => e.IsCompleted).ThenByDescending(e => e.CreatedDate);
 
         await response.WriteAsJsonAsync(requestsForYearMonth);
 
