@@ -5,4 +5,5 @@ namespace API.PrayerRequest;
 public interface IPrayerRequestWriter
 {
     Task SavePrayerRequest(PrayerRequestModel prayerRequest);
+    Task CompletePrayerRequest(string prayerRequestId);
 }

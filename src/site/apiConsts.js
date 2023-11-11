@@ -1,3 +1,3 @@
 export default {
-    baseUrl: 'https://perpetualadorationsisters.azurewebsites.net/api'
+  baseUrl: 'https://perpetualadorationsisters.azurewebsites.net/api'
 }
