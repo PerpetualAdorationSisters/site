@@ -186,7 +186,7 @@ export default {
         this.prayerRequests = [
           ...thisMonthResponse.data,
           ...lastMonthResponse.data
-        ].slice(0, 100)
+        ].slice(0, 200)
       } catch (ex) {
         if (ex.response.status === 401) {
           this.errorMessage = 'Incorrect password, please try again.'
