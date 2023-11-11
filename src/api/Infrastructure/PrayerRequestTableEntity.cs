@@ -12,6 +12,7 @@ public class PrayerRequestTableEntity : ITableEntity
     public string Request { get; set; }
     public string RecipientName { get; set; }
     public string RecipientAddress { get; set; }
+    public bool IsCompleted { get; set; }
 
     public string PartitionKey { get; set; }
     public string RowKey { get; set; }
