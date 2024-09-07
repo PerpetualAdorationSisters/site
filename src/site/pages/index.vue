@@ -1,5 +1,29 @@
 <template>
   <div class="pb-10">
+    <div
+      v-for="event in events"
+      :key="event.title"
+      class="mb-10 mt-1 text-center"
+    >
+      <div
+        v-if="daysBetween(event.date, new Date()) >= 0"
+      >
+        <div class="text-primary text-2xl font-semibold mb-5">
+          <span
+            v-if="daysBetween(event.date, new Date()) > 0"
+            >{{ daysBetween(event.date, new Date()) }} day<span v-if="daysBetween(event.date, new Date()) > 1">s</span> to go!</span
+          >
+          {{ event.title }}
+        </div>
+        <img
+          style="max-height: 600px"
+          :src="event.imageUrl"
+          :alt="event.imageAlt"
+          class="pa-2 m-auto"
+        />
+      </div>
+    </div>
+
     <div class="mb-5 grid grid-flow-col px-2">
       <div
         v-for="(link, i) in topLinks"
@@ -7,10 +31,10 @@
         class="col-span-full md:col-span-4 flex flex-col m-auto text-center md:mt-0"
         :class="{ 'mt-20': i > 0 }"
       >
-        <h2 class="text-primary text-xl font-semibold mb-4 ">
+        <h2 class="text-primary text-xl font-semibold mb-4">
           {{ link.title }}
         </h2>
-        <img :src="link.imageUrl" :alt="link.imageAlt" height="300">
+        <img :src="link.imageUrl" :alt="link.imageAlt" height="300" />
         <nuxt-link :to="link.linkUrl">
           <div class="p-2 bg-primary text-white mt-7 text-lg rounded">
             {{ link.linkText }}
@@ -73,7 +97,7 @@
       />
     </div>
 
-    <hr class="bg-gray-50 mt-20">
+    <hr class="bg-gray-50 mt-20" />
     <h2 class="my-7 text-primary text-xl font-semibold">
       Monastery Construction Photos
     </h2>
@@ -87,14 +111,12 @@
           :src="monasteryImage.imageUrl"
           :alt="monasteryImage.imageAlt"
           class="full-width-image pa-2"
-        >
+        />
       </div>
     </div>
 
-    <hr class="bg-gray-50 mt-20">
-    <h2 class="my-7 text-primary text-xl font-semibold">
-      Testimonials
-    </h2>
+    <hr class="bg-gray-50 mt-20" />
+    <h2 class="my-7 text-primary text-xl font-semibold">Testimonials</h2>
     <div class="mt-5 mb-7 grid grid-cols-3 gap-5 md:gap-20 mx-0 md:mx-20">
       <div
         v-for="testimonial in testimonials"
@@ -105,13 +127,11 @@
           src="~/assets/icons/quote-left-secondary.svg"
           width="30"
           class="mb-2"
-        >
+        />
         <p class="text-primary italic">
           {{ testimonial.text }}
         </p>
-        <p class="text-primary italic mt-5">
-          ~ {{ testimonial.person }}
-        </p>
+        <p class="text-primary italic mt-5">~ {{ testimonial.person }}</p>
       </div>
     </div>
   </div>
@@ -193,29 +213,43 @@ export default {
     ],
     testimonials: [
       {
-        text:
-          'We always call the Perpetual Adoration Sisters of the Blessed Sacrament and have them pray when our family needs it. Their prayer brings our family peace when we need it most. They are a great gift to our diocese!',
+        text: 'We always call the Perpetual Adoration Sisters of the Blessed Sacrament and have them pray when our family needs it. Their prayer brings our family peace when we need it most. They are a great gift to our diocese!',
         person: 'Barb Swift'
       },
       {
-        text:
-          "Praying with the Perpetual Adoration Sisters of the Blessed Sacrament has had a profound effect on my life and my family's. When I pray with the Sisters I truly feel the presence of the Lord.",
+        text: "Praying with the Perpetual Adoration Sisters of the Blessed Sacrament has had a profound effect on my life and my family's. When I pray with the Sisters I truly feel the presence of the Lord.",
         person: 'Dave Fleck'
       },
       {
-        text:
-          'The meditation aspect of adoration with the Eucharist is impossible to describe. Having the Adoration Sisters available 24 hours a day to pray for us, is perhaps the greatest unadvertised benefit available to us in our diocese. They are a blessing.',
+        text: 'The meditation aspect of adoration with the Eucharist is impossible to describe. Having the Adoration Sisters available 24 hours a day to pray for us, is perhaps the greatest unadvertised benefit available to us in our diocese. They are a blessing.',
         person: 'Steve Lynch'
       }
+    ],
+    events: [
+      {
+        title: 'Join us for our 2024 fiesta!',
+        date: Date.parse('2024-10-06'),
+        imageUrl: require('~/assets/events/2024_fiesta_fundraiser.jpg'),
+        imageAlt:
+          "Perpetual Adoration Sisters Fiesta Fundraiser Flyer. Event is Sunday, October 6th, 2024, 1:00 - 5:30 PM. Address is 707 W. 4th Street, Sioux Falls, SD. There will be games, food, children's pinata, silent auction, and more."
+      }
     ]
-  })
+  }),
+  methods: {
+    daysBetween (date1, date2) {
+      const oneDay = 24 * 60 * 60 * 1000 // hours*minutes*seconds*milliseconds
+      const diffDays = Math.ceil((date1 - date2) / oneDay)
+      return diffDays
+    }
+  }
 }
 </script>
 
 <style scoped>
 .full-height-video {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
+  padding-bottom: 56.25%;
+  /* 16:9 */
   height: 0;
 }
 
