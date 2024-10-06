@@ -9,10 +9,6 @@
         v-if="daysBetween(event.date, new Date()) >= 0"
       >
         <div class="text-primary text-2xl font-semibold mb-5">
-          <span
-            v-if="daysBetween(event.date, new Date()) > 0"
-            >{{ daysBetween(event.date, new Date()) }} day<span v-if="daysBetween(event.date, new Date()) > 1">s</span> to go!</span
-          >
           {{ event.title }}
         </div>
         <img
