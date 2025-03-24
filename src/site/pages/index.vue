@@ -9,10 +9,6 @@
         v-if="daysBetween(event.date, new Date()) >= 0"
       >
         <div class="text-primary text-2xl font-semibold mb-5">
-          <span
-            v-if="daysBetween(event.date, new Date()) > 0"
-            >{{ daysBetween(event.date, new Date()) }} day<span v-if="daysBetween(event.date, new Date()) > 1">s</span> to go!</span
-          >
           {{ event.title }}
         </div>
         <img
@@ -226,13 +222,13 @@ export default {
       }
     ],
     events: [
-      {
-        title: 'Join us for our 2024 fiesta!',
-        date: Date.parse('2024-10-06'),
-        imageUrl: require('~/assets/events/2024_fiesta_fundraiser.jpg'),
-        imageAlt:
-          "Perpetual Adoration Sisters Fiesta Fundraiser Flyer. Event is Sunday, October 6th, 2024, 1:00 - 5:30 PM. Address is 707 W. 4th Street, Sioux Falls, SD. There will be games, food, children's pinata, silent auction, and more."
-      }
+      // {
+      //   title: 'Join us for our 2024 fiesta!',
+      //   date: Date.parse('2024-10-06'),
+      //   imageUrl: require('~/assets/events/2024_fiesta_fundraiser.jpg'),
+      //   imageAlt:
+      //     "Perpetual Adoration Sisters Fiesta Fundraiser Flyer. Event is Sunday, October 6th, 2024, 1:00 - 5:30 PM. Address is 707 W. 4th Street, Sioux Falls, SD. There will be games, food, children's pinata, silent auction, and more."
+      // }
     ]
   }),
   methods: {
