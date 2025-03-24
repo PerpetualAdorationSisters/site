@@ -56,7 +56,7 @@
     </p>
 
     <div>
-      <a href="https://secure.acceptiva.com/?cst=f62600" target="_blank" rel="nofollow noreferrer">
+      <a href="https://ccfesd.fcsuite.com/erp/donate/create/fund?funit_id=2853" target="_blank" rel="nofollow noreferrer">
         <div class="p-2 bg-primary text-white my-7 text-lg rounded donate-button text-center">Make A Donation</div>
       </a>
     </div>
