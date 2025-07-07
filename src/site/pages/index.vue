@@ -222,13 +222,13 @@ export default {
       }
     ],
     events: [
-      // {
-      //   title: 'Join us for our 2024 fiesta!',
-      //   date: Date.parse('2024-10-06'),
-      //   imageUrl: require('~/assets/events/2024_fiesta_fundraiser.jpg'),
-      //   imageAlt:
-      //     "Perpetual Adoration Sisters Fiesta Fundraiser Flyer. Event is Sunday, October 6th, 2024, 1:00 - 5:30 PM. Address is 707 W. 4th Street, Sioux Falls, SD. There will be games, food, children's pinata, silent auction, and more."
-      // }
+      {
+        title: 'Join us for our 2025 fiesta!',
+        date: Date.parse('2025-10-05'),
+        imageUrl: require('~/assets/events/2025_fiesta_fundraiser_save_the_date.jpeg'),
+        imageAlt:
+          "Perpetual Adoration Sisters Fiesta Fundraiser Save The Date Flyer. Event is Sunday, October 5th, 2024, 1:00 - 5:30 PM."
+      }
     ]
   }),
   methods: {
