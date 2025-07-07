@@ -227,7 +227,7 @@ export default {
         date: Date.parse('2025-10-05'),
         imageUrl: require('~/assets/events/2025_fiesta_fundraiser_save_the_date.jpeg'),
         imageAlt:
-          "Perpetual Adoration Sisters Fiesta Fundraiser Save The Date Flyer. Event is Sunday, October 5th, 2024, 1:00 - 5:30 PM."
+          'Perpetual Adoration Sisters Fiesta Fundraiser Save The Date Flyer. Event is Sunday, October 5th, 2024, 1:00 - 5:30 PM.'
       }
     ]
   }),

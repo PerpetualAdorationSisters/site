@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/admin/prayer-requests", {data:[{}],fetch:{},mutations:void 0});
