@@ -222,13 +222,6 @@ export default {
       }
     ],
     events: [
-      {
-        title: 'Join us for our 2025 fiesta!',
-        date: Date.parse('2025-10-05'),
-        imageUrl: require('~/assets/events/2025_fiesta_fundraiser_main.jpeg'),
-        imageAlt:
-          'Perpetual Adoration Sisters Fiesta Fundraiser Flyer. Event is Sunday, October 5th, 2024, 1:00 - 5:30 PM, at 707 W. 4th Street Sioux Falls, SD.'
-      }
     ]
   }),
   methods: {

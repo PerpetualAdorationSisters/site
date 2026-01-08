@@ -8,7 +8,7 @@
         </div>
         <h2 class="text-primary text-xl font-semibold">Deceased Loved Ones</h2>
         <a
-          href="https://secure.acceptiva.com/?cst=rEzKFK"
+          href="https://ccfesd.fcsuite.com/erp/donate/create/fund?funit_id=3181"
           target="_blank"
           rel="nofollow noreferrer"
         >
@@ -34,7 +34,7 @@
         </div>
         <h2 class="text-primary text-xl font-semibold">Wedding Anniversaries</h2>
         <a
-          href="https://secure.acceptiva.com/?cst=gJqExh"
+          href="https://ccfesd.fcsuite.com/erp/donate/create/fund?funit_id=3181"
           target="_blank"
           rel="nofollow noreferrer"
         >
@@ -54,7 +54,7 @@
         </div>
         <h2 class="text-primary text-xl font-semibold">Living Intentions</h2>
         <a
-          href="https://secure.acceptiva.com/?cst=9vPcNZ"
+          href="https://ccfesd.fcsuite.com/erp/donate/create/fund?funit_id=3181"
           target="_blank"
           rel="nofollow noreferrer"
         >
